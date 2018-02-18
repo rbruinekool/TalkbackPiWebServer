@@ -1,10 +1,12 @@
-from flask import Flask, render_template
+from flask import Flask, render_template, url_for, redirect
 import socket
 import subprocess
+import time
 
 app = Flask(__name__)
 
 def restart():
+    time.sleep(1)
     command = "/usr/bin/sudo /sbin/shutdown -r now"
     process = subprocess.Popen(command.split(), stdout=subprocess.PIPE)
     output = process.communicate()[0]
@@ -17,7 +19,8 @@ def index():
 
 @app.route('/reboot')
 def rebootPage():
-    return restart()
+    restart()
+    return redirect(url_for('.index'))
 
 if __name__ == '__main__':
     app.run(debug=True, host='0.0.0.0')
