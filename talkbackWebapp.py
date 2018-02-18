@@ -7,7 +7,7 @@ from multiprocessing import Process
 app = Flask(__name__)
 
 def restart():
-    time.sleep(2)
+    time.sleep(3)
     command = "/usr/bin/sudo /sbin/shutdown -r now"
     process = subprocess.Popen(command.split(), stdout=subprocess.PIPE)
     output = process.communicate()[0]
