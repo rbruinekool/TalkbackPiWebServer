@@ -5,8 +5,8 @@ import time
 
 app = Flask(__name__)
 
-def restart():
-    time.sleep(1)
+def restart(time):
+    time.sleep(time)
     command = "/usr/bin/sudo /sbin/shutdown -r now"
     process = subprocess.Popen(command.split(), stdout=subprocess.PIPE)
     output = process.communicate()[0]
@@ -19,7 +19,7 @@ def index():
 
 @app.route('/reboot')
 def rebootPage():
-    restart()
+    restart(2)
     return redirect(url_for('.index'))
 
 if __name__ == '__main__':
