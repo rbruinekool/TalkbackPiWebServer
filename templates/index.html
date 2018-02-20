@@ -6,8 +6,11 @@
 </head>
 <strong>This is the web interface of {{ thisDevice }} </strong>
 <body>
+<form action="/restartmutebox">
+    <input type="submit" value="Restart Mutebox Script" />
+</form>
 <form action="/reboot">
-    <input type="submit" value="Reboot Device" />
+    <input type="submit" value="Reboot Device (takes 2 min)" />
 </form>
 </body>
 </html>
