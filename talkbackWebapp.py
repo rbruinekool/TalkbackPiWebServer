@@ -63,8 +63,10 @@ def start_runner():
     thread.start()
 
 def startMuteBox():
-    path = "/home/pi/x32-broadcast/MuteBoxServer.py"
-    #path = "/Users/rbruinekool/PycharmProjects/x32-broadcast/MuteBoxServer.py"
+    if socket.gethostname() == "Robrechts-MacBook-Pro-4.local":
+        path = "/Users/rbruinekool/PycharmProjects/x32-broadcast/MuteBoxServer.py"
+    else:
+        path = "/home/pi/x32-broadcast/MuteBoxServer.py"
     muteBoxPid = subprocess.Popen(['python2', path]).pid
     fileHandler = open("muteBoxPid.obj", 'wb')
     pickle.dump(muteBoxPid, fileHandler)
