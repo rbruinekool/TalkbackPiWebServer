@@ -63,7 +63,8 @@ def start_runner():
     thread.start()
 
 def startMuteBox():
-    muteBoxPid = subprocess.Popen(['python2', '/Users/rbruinekool/PycharmProjects/x32-broadcast/MuteBoxServer.py']).pid
+    path = "/home/pi/x32-broadcast/MuteBoxServer.py"
+    muteBoxPid = subprocess.Popen(['python2', path]).pid
     fileHandler = open("muteBoxPid.obj", 'wb')
     pickle.dump(muteBoxPid, fileHandler)
     return "muteBoxPid = " + str(muteBoxPid)
