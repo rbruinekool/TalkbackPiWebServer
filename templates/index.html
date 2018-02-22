@@ -6,8 +6,8 @@
 </head>
 <strong>This is the web interface of {{ thisDevice }} </strong>
 <body>
-<form action="/reboot">
-    <input type="submit" value="Reboot Device (takes 2 min)"/>
+<form action="/reboot" >
+    <input type="submit" style="background-color: #F60;" onClick="return confirm('Are you sure you want to restart?');" value="Reboot Device"/>
 </form>
 <br>
 <form action="/restartmutebox">
