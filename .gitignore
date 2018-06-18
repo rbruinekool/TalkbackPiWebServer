@@ -1,1 +1,8 @@
 # Created by .ignore support plugin (hsz.mobi)
+/muteBoxPid.obj
+/talkbackPid.obj
+.idea/TalkbackPiWebServer.iml
+.idea/misc.xml
+.idea/modules.xml
+.idea/workspace.xml
+talkbackPid.obj
