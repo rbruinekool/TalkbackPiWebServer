@@ -158,8 +158,14 @@ def getTalkbackData(deviceName):
     allRows = responseDict["table"]['rows'];
 
     for i in range(0, len(allRows)):
+        deviceFound = False
         if allRows[i]['c'][0]['v'] == deviceName:
+            deviceFound = True
+        if deviceFound:
             return allRows[i]['c'][1]['v']
+        else:
+            print("X32channelsheet is returnin " + deviceName + " as the device")
+            return
 
 
 app.secret_key = 'A0Zr98j/3yX R~XHH!jmN]LWX/,?RT'
