@@ -142,7 +142,7 @@ def checkIn():
     # Stupid statement to allow running on pycharm on mac
     if socket.gethostname() == "Robrechts-MacBook-Pro-4.local":
         thisDevice = "talkback-test"
-        
+
     if "mutebox" in thisDevice:
         r = requests.post(
             "https://script.google.com/macros/s/AKfycbzB3Tig-5MJp3eLhVInG-IGOx7cwVqvfDBjdByuVfHBKkxMvpw/exec",
@@ -173,9 +173,10 @@ def getTalkbackData(deviceName):
     for i in range(0, len(allRows)):
         if allRows[i]['c'][0]['v'] == deviceName:
             deviceFound = True
+            deviceRow = i
 
     if deviceFound:
-        return allRows[i]['c'][1]['v']
+        return allRows[deviceRow]['c'][1]['v']
     else:
         print ("Cant find who this device ("+ deviceName + ") belongs to")
         return
