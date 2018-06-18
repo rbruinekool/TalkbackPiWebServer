@@ -14,7 +14,10 @@ app = Flask(__name__)
 @app.before_first_request
 def beforeRequest():
     thisDevice = socket.gethostname()
-    #thisDevice ="talkback-test"          #delete
+
+    if socket.gethostname() == "Robrechts-MacBook-Pro-4.local":
+        thisDevice = "talkback-a"
+
     if "mutebox" in thisDevice:
         print ("mutebox detected")
         checkIn()
@@ -38,7 +41,11 @@ def rebootPage():
 @app.route('/restartmutebox')
 def restartMuteBox():
     thisDevice = socket.gethostname()
-    #thisDevice = "talkback-test"        #DELETE
+
+    #Stupid statement to allow running on pycharm on mac
+    if socket.gethostname() == "Robrechts-MacBook-Pro-4.local":
+        thisDevice = "talkback-a"
+
     if "mutebox" in thisDevice:
         fileHandler = open("muteBoxPid.obj", 'rb')
         muteBoxPid = pickle.load(fileHandler)
@@ -98,10 +105,10 @@ def startTalkbackPi():
     deviceName = socket.gethostname();
     if deviceName == "Robrechts-MacBook-Pro-4.local":
         path = "/Users/rbruinekool/PycharmProjects/x32-broadcast/ProducerServer.py"
+        deviceName = "talkback-a"
     else:
         path = "/home/pi/x32-broadcast/ProducerServer.py"
 
-    #deviceName = "talkback-test" #REMOVE!!!!!!!!!!!!!!!!!!!!!!!!!
     person = getTalkbackData(deviceName);
     talkbackPid = subprocess.Popen(['python2', path, 'o', person]).pid
     fileHandler = open("talkbackPid.obj", 'wb')
@@ -157,15 +164,16 @@ def getTalkbackData(deviceName):
     responseDict = eval(response)
     allRows = responseDict["table"]['rows'];
 
+    deviceFound = False
     for i in range(0, len(allRows)):
-        deviceFound = False
         if allRows[i]['c'][0]['v'] == deviceName:
             deviceFound = True
-        if deviceFound:
-            return allRows[i]['c'][1]['v']
-        else:
-            print("X32channelsheet is returnin " + deviceName + " as the device")
-            return
+
+    if deviceFound:
+        return allRows[i]['c'][1]['v']
+    else:
+        print ("Cant find who this device ("+ deviceName + ") belongs to")
+        return
 
 
 app.secret_key = 'A0Zr98j/3yX R~XHH!jmN]LWX/,?RT'
