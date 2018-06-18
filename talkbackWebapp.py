@@ -15,8 +15,9 @@ app = Flask(__name__)
 def beforeRequest():
     thisDevice = socket.gethostname()
 
+    # Stupid statement to allow running on pycharm on mac
     if socket.gethostname() == "Robrechts-MacBook-Pro-4.local":
-        thisDevice = "talkback-a"
+        thisDevice = "talkback-test"
 
     if "mutebox" in thisDevice:
         print ("mutebox detected")
@@ -44,7 +45,7 @@ def restartMuteBox():
 
     #Stupid statement to allow running on pycharm on mac
     if socket.gethostname() == "Robrechts-MacBook-Pro-4.local":
-        thisDevice = "talkback-a"
+        thisDevice = "talkback-test"
 
     if "mutebox" in thisDevice:
         fileHandler = open("muteBoxPid.obj", 'rb')
@@ -137,7 +138,11 @@ def checkIn():
     s.close()
 
     thisDevice = socket.gethostname()
-    thisDevice = "talkback-test"
+
+    # Stupid statement to allow running on pycharm on mac
+    if socket.gethostname() == "Robrechts-MacBook-Pro-4.local":
+        thisDevice = "talkback-test"
+        
     if "mutebox" in thisDevice:
         r = requests.post(
             "https://script.google.com/macros/s/AKfycbzB3Tig-5MJp3eLhVInG-IGOx7cwVqvfDBjdByuVfHBKkxMvpw/exec",
