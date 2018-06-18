@@ -171,7 +171,7 @@ def getTalkbackData(deviceName):
 
     deviceFound = False
     for i in range(0, len(allRows)):
-        if allRows[i]['c'][0]['v'] == deviceName:
+        if allRows[i]['c'][0]['v'].upper() == deviceName.upper():
             deviceFound = True
             deviceRow = i
 
